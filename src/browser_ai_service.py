@@ -163,7 +163,7 @@ async def verify_browser_ai_token(authorization: str = Header(None)) -> dict[str
         else:
             token = authorization
 
-        from apps.backend.saas.auth_service import TokenManager
+        # from helix_core.auth import TokenManager
 
         payload = TokenManager.verify_token(token)
 
@@ -200,7 +200,7 @@ async def get_llm_response(user_id: str, prompt: str, provider: str | None = Non
     Get LLM response using user's BYOK key or platform fallback.
     """
     try:
-        from apps.backend.llm_agent_engine import get_llm_engine
+        # from helix_core.llm_bridge import get_llm_engine
 
         engine = get_llm_engine()
         if engine:
@@ -217,7 +217,7 @@ async def get_llm_response(user_id: str, prompt: str, provider: str | None = Non
 
         # Fallback to UnifiedLLM when engine unavailable
         try:
-            from apps.backend.services.unified_llm import unified_llm
+            # from helix_core.llm_bridge import unified_llm
 
             result = await unified_llm.chat_with_metadata(
                 messages=[
